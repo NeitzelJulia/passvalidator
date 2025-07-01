@@ -35,4 +35,18 @@ class MainTest {
         assertTrue(Main.hasDigit("Password9"));
     }
 
+    @Test
+    void testIsMixedCase_mixedCase() {
+        assertTrue(Main.isMixedCase("AbCdEf"));
+    }
+
+    @Test
+    void testIsMixedCase_onlyUpperCase() {
+        assertFalse(Main.isMixedCase("PASSWORD"));
+    }
+
+    @Test
+    void testIsMixedCase_onlyLowerCase() {
+        assertFalse(Main.isMixedCase("password"));
+    }
 }

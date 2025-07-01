@@ -11,9 +11,8 @@ public class Main {
         return password.matches(".*\\d.*");
     }
 
-    //ToDo hasUpperAndLowerCase
-    public static boolean hasUpperAndLowerCase(String password) {
-        return true;
+    public static boolean isMixedCase(String password) {
+        return (password.matches(".*[a-z].*") && password.matches(".*[A-Z].*"));
     }
 
     //Todo isBlacklistedPassword
