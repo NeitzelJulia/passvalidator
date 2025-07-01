@@ -7,9 +7,8 @@ public class Main {
         return password.length() >= 8;
     }
 
-    //ToDo hasDigits
-    public static boolean hasDigits(String password) {
-        return true;
+    public static boolean hasDigit(String password) {
+        return password.matches(".*\\d.*");
     }
 
     //ToDo hasUpperAndLowerCase
