@@ -64,4 +64,19 @@ class MainTest {
     void testIsPasswordBlacklisted_withUniquePassword() {
         assertFalse(Main.isBlacklistedPassword("Un1qu3Pwd!"));
     }
+
+    @Test
+    void testHasSpecialCharacter_withSpecialCharacter() {
+        assertTrue(Main.hasSpecialCharacter("abc!123"));
+    }
+
+    @Test
+    void testHasSpecialCharacter_withMultipleSpecialCharacters() {
+        assertTrue(Main.hasSpecialCharacter("a@b#c$d%"));
+    }
+
+    @Test
+    void testHasSpecialCharacter_withLettersAndDigitsOnly() {
+        assertFalse(Main.hasSpecialCharacter("abc123XYZ"));
+    }
 }

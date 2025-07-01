@@ -32,6 +32,10 @@ public class Main {
                 .contains(password.toLowerCase());
     }
 
+    public static boolean hasSpecialCharacter(String password) {
+        return password.matches(".*[^A-Za-z0-9].*");
+    }
+
 
     public static String[] loadCommonPasswords() {
         HttpClient client = HttpClient.newHttpClient();
