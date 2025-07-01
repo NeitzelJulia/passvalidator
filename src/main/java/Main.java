@@ -1,6 +1,18 @@
-public class Main {
-    public static void main(String[] args) {
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Arrays;
 
+public class Main {
+
+    private static final String RAW_URL =
+            "https://raw.githubusercontent.com/danielmiessler/SecLists/"
+                    + "master/Passwords/Common-Credentials/"
+                    + "Language-Specific/German_Pwdb_common-password-list-top-150.txt";
+    private static final String[] BLACKLIST = loadCommonPasswords();
+
+    public static void main(String[] args) {
     }
 
     public static boolean checkPasswordLength(String password) {
@@ -15,8 +27,27 @@ public class Main {
         return (password.matches(".*[a-z].*") && password.matches(".*[A-Z].*"));
     }
 
-    //Todo isBlacklistedPassword
-    public static boolean hasSpecialCharacters(String password) {
-        return true;
+    public static boolean isBlacklistedPassword(String password) {
+        return Arrays.asList(BLACKLIST)
+                .contains(password.toLowerCase());
+    }
+
+
+    public static String[] loadCommonPasswords() {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(RAW_URL))
+                .build();
+        try {
+            String body = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+            return Arrays.stream(body.split("\\R"))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty() && !s.startsWith("#"))
+                    .map(String::toLowerCase)
+                    .toArray(String[]::new);
+        } catch (Exception e) {
+            System.err.println("Error loading remote passwords: " + e.getMessage());
+            return new String[0];
+        }
     }
 }

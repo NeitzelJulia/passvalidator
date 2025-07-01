@@ -49,4 +49,19 @@ class MainTest {
     void testIsMixedCase_onlyLowerCase() {
         assertFalse(Main.isMixedCase("password"));
     }
+
+    @Test
+    void testIsPasswordBlacklisted_withBlacklistedPassword() {
+        assertTrue(Main.isBlacklistedPassword("passwort"));
+    }
+
+    @Test
+    void testIsPasswordBlacklisted_caseInsensitive() {
+        assertTrue(Main.isBlacklistedPassword("PassWort"));
+    }
+
+    @Test
+    void testIsPasswordBlacklisted_withUniquePassword() {
+        assertFalse(Main.isBlacklistedPassword("Un1qu3Pwd!"));
+    }
 }
