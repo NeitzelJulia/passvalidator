@@ -3,9 +3,8 @@ public class Main {
 
     }
 
-    //ToDo checkPasswordLength
     public static boolean checkPasswordLength(String password) {
-        return true;
+        return password.length() >= 8;
     }
 
     //ToDo hasDigits
