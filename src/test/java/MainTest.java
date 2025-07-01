@@ -79,4 +79,26 @@ class MainTest {
     void testHasSpecialCharacter_withLettersAndDigitsOnly() {
         assertFalse(Main.hasSpecialCharacter("abc123XYZ"));
     }
+
+    @Test
+    void testGeneratePassword_with8Characters() {
+        String password = Main.generatePassword(8);
+        assertEquals(8, password.length());
+        assertTrue(Main.checkPasswordLength(password));
+        assertTrue(Main.hasDigit(password));
+        assertTrue(Main.isMixedCase(password));
+        assertTrue(Main.hasSpecialCharacter(password));
+        assertFalse(Main.isBlacklistedPassword(password));
+    }
+
+    @Test
+    void testGeneratePassword_with12Characters() {
+        String password = Main.generatePassword(12);
+        assertEquals(12, password.length());
+        assertTrue(Main.checkPasswordLength(password));
+        assertTrue(Main.hasDigit(password));
+        assertTrue(Main.isMixedCase(password));
+        assertTrue(Main.hasSpecialCharacter(password));
+        assertFalse(Main.isBlacklistedPassword(password));
+    }
 }
